@@ -247,7 +247,7 @@
 
   <main id="top">
     <section class="hero wrap">
-      <div class="hero-copy"><div class="eyebrow"><i></i> MONITOR DE TRADE ADS 24/7</div><h1>O maior monitor<br>de Trade Ads do<br>Roblox, <span>exclusivo no<br>nosso site</span></h1><p>A ferramenta definitiva para você dominar o mercado de trade do Roblox. O Fish Trader monitora os Trade Ads, encontra jogadores com pouca atividade e separa as oportunidades mais interessantes para você.</p><div class="hero-actions"><a class="hero-button" href="#rodape">Acessar a Ferramenta ↗</a><button class="ghost" id="watch">Ver como funciona ↓</button></div></div>
+      <div class="hero-copy"><div class="eyebrow"><i></i> MONITOR DE TRADE ADS 24/7</div><h1>O maior monitor<br>de Trade Ads do<br>Roblox, <span>exclusivo no<br>nosso site</span></h1><p>A ferramenta definitiva para você dominar o mercado de trade do Roblox. O Fish Trader monitora os Trade Ads, encontra jogadores com pouca atividade e separa as oportunidades mais interessantes para você.</p><div class="hero-actions"><button class="hero-button" id="btnAcessar">Acessar a Ferramenta ↗</button><button class="ghost" id="watch">Ver como funciona ↓</button></div></div>
       <div class="fish-stage"><div class="orbit"></div><svg class="fish" viewBox="0 0 620 570" fill="none" aria-label="Peixe geométrico poligonal"><g class="outline"><path class="white line" d="M91 294 222 151 406 109 538 174 493 252 548 331 408 388 222 363 91 294Z"/><path class="soft line" d="m91 294 131-143 3 212L91 294Z"/><path class="white line" d="m222 151 118 82-115 130-3-212Z"/><path class="dark line" d="m340 233 153 19-115 136-73-5 35-150Z"/><path class="soft line" d="m222 363 73 5-39 113-65-90 31-28Z"/><path class="white line" d="m295 368 113 20-36 143-77-163Z"/><path class="dark line" d="m408 388 72-57 48 11-120 91v-45Z"/><path class="white line" d="m493 252 45-78-7 112-38-34Z"/><path class="dark line" d="m340 233 30-76 92 42-122 34Z"/><path class="white line" d="m370 157 75-48-39 86-36-38Z"/><path class="dark line" d="m445 109 93 65-73 15-20-80Z"/><path class="white line" d="m222 151 72-68 46 150-118-82Z"/><path class="soft line" d="m294 83 112 26-66 124-46-150Z"/><path class="white line" d="m294 83 27-63 85 89-112-26Z"/><path class="dark line" d="m321 20 84 89-41 48-43-137Z"/><path class="white line" d="m493 252 55-7-55 86-55-50 55-29Z"/><path class="dark line" d="m538 245 40 76-85 10 45-86Z"/><circle cx="445" cy="173" r="11" class="white line"/><circle cx="445" cy="173" r="4" fill="#121212"/></g></svg></div>
     </section>
 
@@ -468,7 +468,6 @@
       };
 
       document.querySelectorAll('.hero-button,.discord').forEach((link)=>{
-        link.setAttribute('href','#access-gate');
         link.addEventListener('click',(event)=>{
           event.preventDefault();
           link.classList.remove('button-click');
@@ -608,7 +607,7 @@
         localStorage.removeItem('fishTraderSession');
         document.querySelector('#toolHome').hidden=true;
         location.reload();
-      };
+      });
     })();
   </script>
 
