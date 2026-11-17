@@ -196,11 +196,7 @@
   <style>
     .hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;width:26px;height:18px;padding:0;z-index:101;cursor:pointer}
     .hamburger span{display:block;width:100%;height:2px;background:#fff;transition:all .3s cubic-bezier(.22,1,.36,1);border-radius:2px}
-    .hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-    .hamburger.active span:nth-child(2){opacity:0}
-    .hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-    .menu-lateral{position:fixed;top:0;left:0;width:260px;height:100vh;background:#0a0a0a;border-right:1px solid #ffffff1b;z-index:100;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .35s cubic-bezier(.22,1,.36,1);box-shadow:10px 0 40px #000c}
+        .menu-lateral{position:fixed;top:0;left:0;width:260px;height:100vh;background:#0a0a0a;border-right:1px solid #ffffff1b;z-index:100;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .35s cubic-bezier(.22,1,.36,1);box-shadow:10px 0 40px #000c}
     .menu-lateral[hidden]{display:none}
     .menu-lateral-header{padding:26px 24px 18px;font-weight:800;letter-spacing:.14em;color:#fff;font-size:13px;border-bottom:1px solid #ffffff1b;background:linear-gradient(90deg,#ffffff06,transparent)}
     .menu-list{display:flex;flex-direction:column;padding:10px 0}
@@ -220,8 +216,8 @@
       const menu=document.querySelector('#menuLateral');
       const overlay=document.querySelector('#menuOverlay');
 
-      function abrir(){btn.setAttribute('aria-expanded','true');btn.classList.add('active');menu.hidden=false;overlay.hidden=false;requestAnimationFrame(()=>{menu.style.transform='translateX(0)';overlay.style.opacity='1'})}
-      function fechar(){btn.setAttribute('aria-expanded','false');btn.classList.remove('active');menu.style.transform='translateX(-100%)';overlay.style.opacity='0';setTimeout(()=>{menu.hidden=true;overlay.hidden=true},350)}
+      function abrir(){btn.setAttribute('aria-expanded','true');menu.hidden=false;overlay.hidden=false;requestAnimationFrame(()=>{menu.style.transform='translateX(0)';overlay.style.opacity='1'})}
+      function fechar(){btn.setAttribute('aria-expanded','false');menu.style.transform='translateX(-100%)';overlay.style.opacity='0';setTimeout(()=>{menu.hidden=true;overlay.hidden=true},350)}
 
       btn.addEventListener('click',()=>{btn.classList.contains('active')?fechar():abrir()});
       overlay.addEventListener('click',fechar);
