@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/roblox/user", "destination": "/api/roblox/user" },
+    { "source": "/api/roblox/inventory", "destination": "/api/roblox/inventory" }
+  ]
+}
