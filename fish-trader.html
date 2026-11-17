@@ -216,8 +216,8 @@
       const menu=document.querySelector('#menuLateral');
       const overlay=document.querySelector('#menuOverlay');
 
-      function abrir(){btn.setAttribute('aria-expanded','true');btn.hidden=true;menu.hidden=false;overlay.hidden=false;requestAnimationFrame(()=>{menu.style.transform='translateX(0)';overlay.style.opacity='1'})}
-      function fechar(){btn.setAttribute('aria-expanded','false');btn.hidden=false;menu.style.transform='translateX(-100%)';overlay.style.opacity='0';setTimeout(()=>{menu.hidden=true;overlay.hidden=true},350)}
+      function abrir(){btn.setAttribute('aria-expanded','true');btn.style.display='none';menu.hidden=false;overlay.hidden=false;requestAnimationFrame(()=>{menu.style.transform='translateX(0)';overlay.style.opacity='1'})}
+      function fechar(){btn.setAttribute('aria-expanded','false');btn.style.display='flex';menu.style.transform='translateX(-100%)';overlay.style.opacity='0';setTimeout(()=>{menu.hidden=true;overlay.hidden=true},350)}
 
       btn.addEventListener('click',()=>{btn.classList.contains('active')?fechar():abrir()});
       overlay.addEventListener('click',fechar);
