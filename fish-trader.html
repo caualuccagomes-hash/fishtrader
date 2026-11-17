@@ -171,15 +171,61 @@
     </section>
   </div>
   <section id="toolHome" hidden style="position:fixed;inset:0;z-index:115;overflow:auto;background:#070707;color:#eee;padding:30px;font-family:Inter,system-ui,sans-serif">
-    <header style="max-width:1200px;margin:auto;display:flex;align-items:center;gap:14px;border-bottom:1px solid #ffffff22;padding:12px 0 22px">
+    <header style="max-width:1200px;margin:auto;display:flex;align-items:center;gap:14px;border-bottom:1px solid #ffffff22;padding:12px 0 22px;position:relative">
+      <button id="menuHamburguer" style="background:transparent;border:none;color:#fff;font-size:22px;margin-right:10px;cursor:pointer;z-index:101">☰</button>
       <img id="toolAvatar" src="" alt="" style="width:46px;height:46px;border-radius:50%;border:1px solid #ffffff55"><div style="flex:1"><strong id="toolNick">Roblox user</strong><div style="color:#999;font-size:12px">Perfil conectado</div></div><button id="toolLogout" style="background:#111;color:#eee;border:1px solid #ffffff33;padding:10px 14px;border-radius:9px">Sair</button>
     </header>
+
+    <div id="menuLateral" class="menu-lateral" hidden>
+      <div class="menu-lateral-header">Menu</div>
+      <button class="menu-item" onclick="document.querySelector('#menuLateral').hidden=true"><span>🏠</span> Início</button>
+      <button class="menu-item" onclick="document.querySelector('#menuLateral').hidden=true"><span>📦</span> Meus Limiteds</button>
+      <button class="menu-item" onclick="document.querySelector('#menuLateral').hidden=true"><span>📊</span> Gráfico RAP</button>
+      <button class="menu-item" id="menuSair" style="color:#ff9a9a"><span>🚪</span> Sair da conta</button>
+    </div>
+
+    <div id="menuOverlay" class="menu-overlay" hidden></div>
     <main style="max-width:1200px;margin:34px auto"><div style="color:#999;font-size:11px;letter-spacing:.18em">FISH TRADER / MY PROFILE</div><h1 style="font-size:38px;margin:8px 0">Visão geral do trader</h1><p style="color:#999;margin-top:0">Resumo do perfil Roblox e atividade de trade.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:25px 0"><article class="tool-stat"><small>RAP total</small><b id="profileRap">Carregando…</b><span>Somatório do RAP recente Roblox</span></article><article class="tool-stat"><small>Limiteds</small><b id="profileCount">—</b><span>Itens collectibles públicos</span></article><article class="tool-stat"><small>Inventário</small><b id="inventoryState">Carregando…</b><span id="inventoryNote">Buscando dados públicos do Roblox</span></article></div>
       <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px"><article class="tool-panel"><h2>RAP por item</h2><div id="inventoryChart" style="min-height:210px;display:flex;align-items:end;gap:7px;padding:15px 0"></div><small style="color:#888">RAP recente fornecido pelo Roblox.</small></article><article class="tool-panel"><h2>Limiteds do inventário</h2><p id="inventorySummary">Buscando collectibles públicos…</p><div id="inventoryItems" class="activity-empty"></div></article></div>
     </main>
   </section>
   <style>.tool-stat,.tool-panel{background:#101010;border:1px solid #ffffff24;border-radius:15px;padding:20px}.tool-stat small,.tool-stat span{display:block;color:#999}.tool-stat b{display:block;font-size:28px;margin:12px 0 5px}.tool-panel h2{margin-top:0}.tool-panel p{color:#aaa;line-height:1.6}.activity-empty{padding:24px 0;color:#777}@media(max-width:720px){#toolHome>main>div:last-child{grid-template-columns:1fr!important}}</style>
+
+  <style>
+    .menu-lateral{position:fixed;top:0;left:0;width:260px;height:100vh;background:#0d0d0d;border-right:1px solid #ffffff24;z-index:100;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .3s ease;box-shadow:4px 0 20px #0008}
+    .menu-lateral[hidden]{display:none}
+    .menu-lateral-header{padding:20px 20px 10px;font-weight:800;letter-spacing:.1em;color:#fff;font-size:13px;border-bottom:1px solid #ffffff1b}
+    .menu-item{display:flex;align-items:center;gap:12px;padding:14px 20px;border:none;background:transparent;color:#ccc;font-size:14px;cursor:pointer;text-align:left;transition:.2s}
+    .menu-item:hover{background:#ffffff10;color:#fff}
+    .menu-item span{font-size:16px}
+    .menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99;backdrop-filter:blur(2px)}
+    .menu-overlay[hidden]{display:none}
+  </style>
+
+  <script>
+    (()=>{
+      const btn=document.querySelector('#menuHamburguer');
+      const menu=document.querySelector('#menuLateral');
+      const overlay=document.querySelector('#menuOverlay');
+      const sair=document.querySelector('#menuSair');
+
+      function abrir(){menu.hidden=false;overlay.hidden=false;requestAnimationFrame(()=>{menu.style.transform='translateX(0)'})}
+      function fechar(){menu.style.transform='translateX(-100%)';setTimeout(()=>{menu.hidden=true;overlay.hidden=true},300)}
+
+      btn.addEventListener('click',abrir);
+      overlay.addEventListener('click',fechar);
+
+      sair.addEventListener('click',()=>{
+        localStorage.removeItem('fishTraderSession');
+        document.querySelector('#toolHome').hidden=true;
+        document.querySelector('#accessModal').classList.remove('open');
+        document.querySelector('#accessModal').setAttribute('aria-hidden','true');
+        document.body.style.overflow='';
+        fechar();
+      });
+    })();
+  </script>
   <header class="topbar wrap">
     <a href="#top" class="brand">
       <svg class="brand-mark" viewBox="0 0 44 44" fill="none" aria-label="Fish Trader logo"><path d="M7 23.5 17 11l13.5 5.2L39 13l-3.7 10.8L39 34l-8.5-3.5L17 36 7 23.5Z" fill="currentColor" opacity=".12"/><path d="m7 23.5 10-12.5 13.5 5.2L39 13l-3.7 10.8L39 34l-8.5-3.5L17 36 7 23.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m17 11 4.2 12.5L17 36m4.2-12.5L30.5 16m-9.3 7.5L30.5 30.5M7 23.5h14.2M30.5 16l4.8 7.8-4.8 6.7" stroke="currentColor" stroke-width="1.2"/><circle cx="29" cy="20.6" r="1.4" fill="currentColor"/></svg>
