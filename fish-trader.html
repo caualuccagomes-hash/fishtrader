@@ -174,10 +174,7 @@
     </header>
 
     <div id="menuLateral" class="menu-lateral" hidden aria-hidden="true">
-      <div class="menu-lateral-header">
-      <span>Menu</span>
-      <button class="menu-close" aria-label="Fechar menu">×</button>
-    </div>
+      <div class="menu-lateral-header">Menu</div>
       <nav class="menu-list">
         <a href="#" class="menu-item" onclick="event.preventDefault();closeMenu()"><svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6H4M20 12H4M20 18H4"/></svg><span>Início</span></a>
         <a href="#" class="menu-item" onclick="event.preventDefault();closeMenu()"><svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg><span>Meus Limiteds</span></a>
@@ -203,9 +200,7 @@
 
     .menu-lateral{position:fixed;top:0;left:0;width:260px;height:100vh;background:#0a0a0a;border-right:1px solid #ffffff1b;z-index:100;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .35s cubic-bezier(.22,1,.36,1);box-shadow:10px 0 40px #000c}
     .menu-lateral[hidden]{display:none}
-    .menu-lateral-header{padding:26px 24px 18px;font-weight:800;letter-spacing:.14em;color:#fff;font-size:13px;border-bottom:1px solid #ffffff1b;background:linear-gradient(90deg,#ffffff06,transparent);display:flex;justify-content:space-between;align-items:center}
-.menu-lateral-header .menu-close{width:20px;height:20px;border:none;background:transparent;color:#fff;font-size:16px;cursor:pointer;opacity:.6;transition:opacity .2s}
-.menu-lateral-header .menu-close:hover{opacity:1}
+    .menu-lateral-header{padding:26px 24px 18px;font-weight:800;letter-spacing:.14em;color:#fff;font-size:13px;border-bottom:1px solid #ffffff1b;background:linear-gradient(90deg,#ffffff06,transparent)}
     .menu-list{display:flex;flex-direction:column;padding:10px 0}
     .menu-item{display:flex;align-items:center;gap:16px;padding:15px 24px;border:none;background:transparent;color:#b8b8b8;font-size:14px;cursor:pointer;text-decoration:none;transition:.25s;border-left:3px solid transparent;text-align:left}
     .menu-item:hover,.menu-item:focus{background:#0d0d0d;color:#fff;border-left-color:#fff}
@@ -228,7 +223,6 @@
 
       btn.addEventListener('click',()=>{btn.classList.contains('active')?fechar():abrir()});
       overlay.addEventListener('click',fechar);
-      document.querySelectorAll('.menu-close').forEach((el)=>el.addEventListener('click',fechar));
 
       window.sairConta=()=>{
         localStorage.removeItem('fishTraderSession');
