@@ -269,118 +269,130 @@
   <footer class="footer" id="rodape"><div class="wrap"><span>© 2026 Fish Trader. Feito para traders do Roblox.</span><span>Acesso premium à ferramenta em breve ↗</span></div></footer><div class="toast" id="toast">Acesso premium em breve.</div>
 
   <script>
-    const stage=document.querySelector('.fish-stage');
-    stage.querySelector('.fish-image')?.remove();
-    stage.querySelector('.fish')?.remove();
-    stage.insertAdjacentHTML('beforeend',`<svg class="fish-new" viewBox="0 0 700 470" fill="none" aria-label="Peixe geométrico poligonal"><path class="facet-light edge" d="M165 235 52 135 87 235 52 335 165 270 252 344 418 318 547 235 418 152 252 126 165 235Z"/><path class="facet-mid edge" d="M165 235 252 126 260 235 252 344 165 270Z"/><path class="facet-dark edge" d="m260 235 158-83 129 83-129 83-158-83Z"/><path class="facet-light edge" d="m418 152 89-35 40 118-129-83Z"/><path class="facet-mid edge" d="m418 318 89 35 40-118-129 83Z"/><path class="facet-deep edge" d="m507 117 112 42-72 76-40-118Z"/><path class="facet-dark edge" d="m507 353 112-42-72-76-40 118Z"/><path class="facet-light edge" d="m252 126 27-82 65 72-84 10Z"/><path class="facet-mid edge" d="m252 344 27 82 65-72-84-10Z"/><path class="facet-dark edge" d="m279 44 94 72-29 0-65-72Z"/><path class="facet-dark edge" d="m279 426 94-72-29 0-65 72Z"/><path class="detail" d="m418 152-31 83 31 83m-158-83h158m-158 0-95-100m95 100-95 100"/><path class="facet-light edge" d="m547 235 62-10 28 10-28 10-62-10Z"/><circle cx="496" cy="196" r="14" class="facet-light edge"/><circle cx="498" cy="196" r="5" fill="#111"/><path d="m566 229 18 6-18 6" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
+    (()=>{
+      const stage=document.querySelector('.fish-stage');
+      stage.querySelector('.fish-image')?.remove();
+      stage.querySelector('.fish')?.remove();
+      stage.insertAdjacentHTML('beforeend',`<svg class="fish-new" viewBox="0 0 700 470" fill="none" aria-label="Peixe geométrico poligonal"><path class="facet-light edge" d="M165 235 52 135 87 235 52 335 165 270 252 344 418 318 547 235 418 152 252 126 165 235Z"/><path class="facet-mid edge" d="M165 235 252 126 260 235 252 344 165 270Z"/><path class="facet-dark edge" d="m260 235 158-83 129 83-129 83-158-83Z"/><path class="facet-light edge" d="m418 152 89-35 40 118-129-83Z"/><path class="facet-mid edge" d="m418 318 89 35 40-118-129 83Z"/><path class="facet-deep edge" d="m507 117 112 42-72 76-40-118Z"/><path class="facet-dark edge" d="m507 353 112-42-72-76-40 118Z"/><path class="facet-light edge" d="m252 126 27-82 65 72-84 10Z"/><path class="facet-mid edge" d="m252 344 27 82 65-72-84-10Z"/><path class="facet-dark edge" d="m279 44 94 72-29 0-65-72Z"/><path class="facet-dark edge" d="m279 426 94-72-29 0-65 72Z"/><path class="detail" d="m418 152-31 83 31 83m-158-83h158m-158 0-95-100m95 100-95 100"/><path class="facet-light edge" d="m547 235 62-10 28 10-28 10-62-10Z"/><circle cx="496" cy="196" r="14" class="facet-light edge"/><circle cx="498" cy="196" r="5" fill="#111"/><path d="m566 229 18 6-18 6" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
+    })();
   </script>
   <script>
-    const currentFish=document.querySelector('.fish-stage .fish-new');
-    currentFish?.remove();
-    document.querySelector('.fish-stage')?.insertAdjacentHTML('beforeend','<img class="fish-reference" src="fish-web-clean.png?v=7" alt="Peixe low-poly do Fish Trader">');
+    (()=>{
+      const currentFish=document.querySelector('.fish-stage .fish-new');
+      currentFish?.remove();
+      document.querySelector('.fish-stage')?.insertAdjacentHTML('beforeend','<img class="fish-reference" src="fish-web-clean.png?v=7" alt="Peixe low-poly do Fish Trader">');
+    })();
   </script>
   <script>
-    document.body.classList.add('motion-ready');
-    document.querySelectorAll('.section,.footer').forEach((el)=>el.classList.add('reveal'));
-    const revealObserver=new IntersectionObserver((entries)=>entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}}),{threshold:.14});
-    document.querySelectorAll('.reveal').forEach((el)=>revealObserver.observe(el));
+    (()=>{
+      document.body.classList.add('motion-ready');
+      document.querySelectorAll('.section,.footer').forEach((el)=>el.classList.add('reveal'));
+      const revealObserver=new IntersectionObserver((entries)=>entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}}),{threshold:.14});
+      document.querySelectorAll('.reveal').forEach((el)=>revealObserver.observe(el));
+    })();
   </script>
   <script>
-    const loadingStarted=performance.now();
-    const preloader=document.querySelector('#preloader');
-    const hidePreloader=()=>setTimeout(()=>preloader?.classList.add('loaded'),Math.max(0,900-(performance.now()-loadingStarted)));
-    if(document.readyState==='complete')hidePreloader();else window.addEventListener('load',hidePreloader,{once:true});
-    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach((link)=>{
-      link.addEventListener('click',(event)=>{
-        const selector=link.getAttribute('href');
-        const target=document.querySelector(selector);
-        if(!target)return;
-        event.preventDefault();
-        link.classList.remove('button-click');
-        void link.offsetWidth;
-        link.classList.add('button-click');
-        target.scrollIntoView({behavior:'smooth',block:'start'});
+    (()=>{
+      const loadingStarted=performance.now();
+      const preloader=document.querySelector('#preloader');
+      const hidePreloader=()=>setTimeout(()=>preloader?.classList.add('loaded'),Math.max(0,900-(performance.now()-loadingStarted)));
+      if(document.readyState==='complete')hidePreloader();else window.addEventListener('load',hidePreloader,{once:true});
+      document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach((link)=>{
+        link.addEventListener('click',(event)=>{
+          const selector=link.getAttribute('href');
+          const target=document.querySelector(selector);
+          if(!target)return;
+          event.preventDefault();
+          link.classList.remove('button-click');
+          void link.offsetWidth;
+          link.classList.add('button-click');
+          target.scrollIntoView({behavior:'smooth',block:'start'});
+        });
       });
-    });
+    })();
   </script>
   <script>
-    document.querySelectorAll('button').forEach((button)=>button.addEventListener('click',()=>{
-      button.classList.remove('button-click');
-      void button.offsetWidth;
-      button.classList.add('button-click');
-    }));
+    (()=>{
+      document.querySelectorAll('button').forEach((button)=>button.addEventListener('click',()=>{
+        button.classList.remove('button-click');
+        void button.offsetWidth;
+        button.classList.add('button-click');
+      }));
+    })();
   </script>
   <script>
-    const ambientCanvas=document.querySelector('#ambientCanvas');
-    const ambientCtx=ambientCanvas?.getContext('2d');
-    const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(ambientCanvas&&ambientCtx&&!reducedMotion){
-      let particles=[];
-      let canvasWidth=0;
-      let canvasHeight=0;
-      let dpr=1;
-      const resizeCanvas=()=>{
-        dpr=Math.min(window.devicePixelRatio||1,2);
-        canvasWidth=window.innerWidth;
-        canvasHeight=window.innerHeight;
-        ambientCanvas.width=canvasWidth*dpr;
-        ambientCanvas.height=canvasHeight*dpr;
-        ambientCtx.setTransform(dpr,0,0,dpr,0,0);
-        const count=Math.min(82,Math.max(34,Math.floor(canvasWidth/20)));
-        particles=Array.from({length:count},()=>({
-          x:Math.random()*canvasWidth,
-          y:Math.random()*canvasHeight,
-          r:Math.random()*1.6+.35,
-          vx:(Math.random()-.5)*.18,
-          vy:(Math.random()-.5)*.12,
-          a:Math.random()*.45+.15
-        }));
-      };
-      const drawParticles=()=>{
-        ambientCtx.clearRect(0,0,canvasWidth,canvasHeight);
-        for(const p of particles){
-          p.x+=p.vx;
-          p.y+=p.vy;
-          if(p.x<-20)p.x=canvasWidth+20;
-          if(p.x>canvasWidth+20)p.x=-20;
-          if(p.y<-20)p.y=canvasHeight+20;
-          if(p.y>canvasHeight+20)p.y=-20;
-          ambientCtx.beginPath();
-          ambientCtx.fillStyle=`rgba(255,255,255,${p.a})`;
-          ambientCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
-          ambientCtx.fill();
-        }
-        for(let i=0;i<particles.length;i++){
-          for(let j=i+1;j<particles.length;j++){
-            const a=particles[i];
-            const b=particles[j];
-            const dx=a.x-b.x;
-            const dy=a.y-b.y;
-            const d=Math.sqrt(dx*dx+dy*dy);
-            if(d<125){
-              ambientCtx.beginPath();
-              ambientCtx.strokeStyle=`rgba(255,255,255,${(1-d/125)*.08})`;
-              ambientCtx.lineWidth=.65;
-              ambientCtx.moveTo(a.x,a.y);
-              ambientCtx.lineTo(b.x,b.y);
-              ambientCtx.stroke();
+    (()=>{
+      const ambientCanvas=document.querySelector('#ambientCanvas');
+      const ambientCtx=ambientCanvas?.getContext('2d');
+      const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(ambientCanvas&&ambientCtx&&!reducedMotion){
+        let particles=[];
+        let canvasWidth=0;
+        let canvasHeight=0;
+        let dpr=1;
+        const resizeCanvas=()=>{
+          dpr=Math.min(window.devicePixelRatio||1,2);
+          canvasWidth=window.innerWidth;
+          canvasHeight=window.innerHeight;
+          ambientCanvas.width=canvasWidth*dpr;
+          ambientCanvas.height=canvasHeight*dpr;
+          ambientCtx.setTransform(dpr,0,0,dpr,0,0);
+          const count=Math.min(82,Math.max(34,Math.floor(canvasWidth/20)));
+          particles=Array.from({length:count},()=>({
+            x:Math.random()*canvasWidth,
+            y:Math.random()*canvasHeight,
+            r:Math.random()*1.6+.35,
+            vx:(Math.random()-.5)*.18,
+            vy:(Math.random()-.5)*.12,
+            a:Math.random()*.45+.15
+          }));
+        };
+        const drawParticles=()=>{
+          ambientCtx.clearRect(0,0,canvasWidth,canvasHeight);
+          for(const p of particles){
+            p.x+=p.vx;
+            p.y+=p.vy;
+            if(p.x<-20)p.x=canvasWidth+20;
+            if(p.x>canvasWidth+20)p.x=-20;
+            if(p.y<-20)p.y=canvasHeight+20;
+            if(p.y>canvasHeight+20)p.y=-20;
+            ambientCtx.beginPath();
+            ambientCtx.fillStyle=`rgba(255,255,255,${p.a})`;
+            ambientCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
+            ambientCtx.fill();
+          }
+          for(let i=0;i<particles.length;i++){
+            for(let j=i+1;j<particles.length;j++){
+              const a=particles[i];
+              const b=particles[j];
+              const dx=a.x-b.x;
+              const dy=a.y-b.y;
+              const d=Math.sqrt(dx*dx+dy*dy);
+              if(d<125){
+                ambientCtx.beginPath();
+                ambientCtx.strokeStyle=`rgba(255,255,255,${(1-d/125)*.08})`;
+                ambientCtx.lineWidth=.65;
+                ambientCtx.moveTo(a.x,a.y);
+                ambientCtx.lineTo(b.x,b.y);
+                ambientCtx.stroke();
+              }
             }
           }
-        }
-        requestAnimationFrame(drawParticles);
-      };
-      resizeCanvas();
-      window.addEventListener('resize',resizeCanvas);
-      drawParticles();
-    }
-    const stage=document.querySelector('.fish-stage');
-    stage?.addEventListener('pointermove',(event)=>{
-      const rect=stage.getBoundingClientRect();
-      const x=(event.clientX-rect.left)/rect.width-.5;
-      const y=(event.clientY-rect.top)/rect.height-.5;
-      stage.style.setProperty('--glow-x',`${x*24}px`);
-      stage.style.setProperty('--glow-y',`${y*18}px`);
-    });
+          requestAnimationFrame(drawParticles);
+        };
+        resizeCanvas();
+        window.addEventListener('resize',resizeCanvas);
+        drawParticles();
+      }
+      const stage=document.querySelector('.fish-stage');
+      stage?.addEventListener('pointermove',(event)=>{
+        const rect=stage.getBoundingClientRect();
+        const x=(event.clientX-rect.left)/rect.width-.5;
+        const y=(event.clientY-rect.top)/rect.height-.5;
+        stage.style.setProperty('--glow-x',`${x*24}px`);
+        stage.style.setProperty('--glow-y',`${y*18}px`);
+      });
+    })();
   </script>
   <script>
     (()=>{
