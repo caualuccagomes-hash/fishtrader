@@ -186,13 +186,13 @@
 
     <div id="menuOverlay" class="menu-overlay" hidden></div>
     <main style="max-width:1200px;margin:34px auto">
-      <section id="section-profile" class="tool-section">
+      <section id="section-profile" class="tool-section" hidden>
         <div style="color:#999;font-size:11px;letter-spacing:.18em">FISH TRADER / MY PROFILE</div><h1 style="font-size:38px;margin:8px 0">Visão geral do trader</h1><p style="color:#999;margin-top:0">Resumo do perfil Roblox e atividade de trade.</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:25px 0"><article class="tool-stat"><small>RAP total</small><b id="profileRap">Carregando…</b><span>Somatório do RAP recente Roblox</span></article><article class="tool-stat"><small>Limiteds</small><b id="profileCount">—</b><span>Itens collectibles públicos</span></article><article class="tool-stat"><small>Inventário</small><b id="inventoryState">Carregando…</b><span id="inventoryNote">Buscando dados públicos do Roblox</span></article></div>
         <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px"><article class="tool-panel"><h2>RAP por item</h2><div id="inventoryChart" style="min-height:210px;display:flex;align-items:end;gap:7px;padding:15px 0"></div><small style="color:#888">RAP recente fornecido pelo Roblox.</small></article><article class="tool-panel"><h2>Limiteds do inventário</h2><p id="inventorySummary">Buscando collectibles públicos…</p><div id="inventoryItems" class="activity-empty"></div></article></div>
       </section>
 
-      <section id="section-ads" class="tool-section" hidden>
+      <section id="section-ads" class="tool-section">
         <div style="color:#999;font-size:11px;letter-spacing:.18em">FISH TRADER / TRADE ADS</div><h1 style="font-size:38px;margin:8px 0">Trade Ads ao vivo</h1><p style="color:#999;margin-top:0">Anúncios de trade filtrados por jogadores com baixa atividade pública.</p>
         <section class="section ads"><div class="wrap"><div class="ads-panel"><div class="ads-toolbar"><div><div class="kicker">Live monitor</div><h2>Trade Ads encontrados agora</h2></div><div class="status"><i></i> Scanner online · atualizado agora</div></div><div class="ads-grid" id="adsGrid">
           <div class="ad-loading"><div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;color:#999"><div style="width:36px;height:36px;border:3px solid #ffffff22;border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:12px"></div><div>Buscando Trade Ads em tempo real…</div></div></div>
@@ -207,7 +207,8 @@
     .hamburger span{display:block;width:100%;height:2px;background:#fff;transition:all .3s cubic-bezier(.22,1,.36,1);border-radius:2px}
         .menu-lateral{position:fixed;top:0;left:0;width:260px;height:100vh;background:#0a0a0a;border-right:1px solid #ffffff1b;z-index:100;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .35s cubic-bezier(.22,1,.36,1);box-shadow:10px 0 40px #000c}
     .menu-lateral[hidden]{display:none}
-    .menu-lateral-header{padding:26px 24px 18px;font-weight:900;letter-spacing:.3em;color:#fff;font-size:14px;border-bottom:1px solid #ffffff1b;background:linear-gradient(90deg,#ffffff06,transparent);text-transform:uppercase}
+    .menu-lateral-header{padding:26px 24px 18px;font-weight:900;letter-spacing:.3em;color:#fff;font-size:14px;border-bottom:1px solid #ffffff1b;background:linear-gradient(90deg,#ffffff06,transparent);text-transform:uppercase;transition:transform .3s ease, box-shadow .3s ease;cursor:pointer}
+.menu-lateral-header:hover{transform:translateY(-2px);box-shadow:0 8px 25px #000a}
     .menu-list{display:flex;flex-direction:column;padding:10px 0}
     .menu-item{display:flex;align-items:center;gap:16px;padding:15px 24px;border:none;background:transparent;color:#b8b8b8;font-size:14px;cursor:pointer;text-decoration:none;transition:.25s;border-left:3px solid transparent;text-align:left}
     .menu-item:hover,.menu-item:focus{background:#0d0d0d;color:#fff;border-left-color:#fff}
