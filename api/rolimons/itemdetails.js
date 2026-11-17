@@ -15,29 +15,43 @@ module.exports = async (req, res) => {
     return;
   }
 
-  try {
-    const url = `https://api.rolimons.com/items/v2/itemdetails?itemIds=${itemId}`;
-    const response = await fetchRoblox(url, { method: 'GET', headers: { 'user-agent': 'FishTrader/1.0' } });
-    const data = await response.json();
+  const endpoints = [
+    `https://api.rolimons.com/items/v2/itemdetails?itemIds=${itemId}`,
+    `https://www.rolimons.com/api/items/v2/itemdetails?itemIds=${itemId}`,
+    `https://api.rolimons.com/v1/items/${itemId}`
+  ];
 
-    if (!response.ok || !data || !data.details || data.details.length === 0) {
-      res.status(404).json({ error: 'item_not_found' });
-      return;
+  let lastError = null;
+
+  for (const url of endpoints) {
+    try {
+      const response = await fetchRoblox(url, { method: 'GET', headers: { 'user-agent': 'FishTrader/1.0', 'accept': 'application/json' } });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        if (data && data.details && data.details.length > 0) {
+          const detail = data.details[0];
+          return res.status(200).json({
+            itemId: Number(itemId),
+            name: detail.name || 'Item desconhecido',
+            value: Number(detail.value || detail.value_estimate || 0),
+            rap: Number(detail.rap || detail.recentAveragePrice || 0),
+            demand: detail.demand || null,
+            trend: detail.trend || null,
+            imageUrl: detail.image_url || detail.imageUrl || null,
+            source: 'rolimons_api'
+          });
+        }
+      }
+
+      lastError = `Status ${response.status}`;
+    } catch (error) {
+      lastError = error.message;
     }
-
-    const detail = data.details[0];
-    res.status(200).json({
-      itemId: Number(itemId),
-      name: detail.name || 'Item desconhecido',
-      value: Number(detail.value || detail.value_estimate || 0),
-      rap: Number(detail.rap || detail.recentAveragePrice || 0),
-      demand: detail.demand || null,
-      trend: detail.trend || null,
-      imageUrl: detail.image_url || detail.imageUrl || null
-    });
-  } catch (error) {
-    res.status(502).json({ error: 'rolimons_unavailable' });
   }
+
+  res.status(502).json({ error: 'rolimons_unavailable', detail: lastError || 'todos_endpoints_bloqueados' });
 };
 
 function fetchRoblox(url, options = {}) {

@@ -15,34 +15,49 @@ module.exports = async (req, res) => {
     return;
   }
 
-  try {
-    const url = `https://api.rolimons.com/players/v1/playerassets/${userId}?limit=100`;
-    const response = await fetchRoblox(url, { method: 'GET', headers: { 'user-agent': 'FishTrader/1.0' } });
-    const data = await response.json();
+  const endpoints = [
+    `https://api.rolimons.com/players/v1/playerassets/${userId}?limit=100`,
+    `https://www.rolimons.com/api/players/v1/playerassets/${userId}?limit=100`,
+    `https://api.rolimons.com/v1/player/${userId}/items`,
+    `https://api.rolimons.com/players/v1/useritems/${userId}?limit=100`
+  ];
 
-    if (!response.ok || !data || !data.items) {
-      res.status(200).json({ private: true, items: [], error: 'items_unavailable' });
-      return;
+  let lastError = null;
+
+  for (const url of endpoints) {
+    try {
+      const response = await fetchRoblox(url, { method: 'GET', headers: { 'user-agent': 'FishTrader/1.0', 'accept': 'application/json' } });
+      
+      if (response.ok) {
+        const data = await response.json();
+        
+        if (data && data.items) {
+          const items = (data.items || []).map(item => ({
+            itemId: item.item_id || item.itemId || null,
+            name: item.name || 'Item desconhecido',
+            rap: Number(item.rap || item.recentAveragePrice || 0),
+            value: Number(item.value || item.estimatedValue || 0),
+            imageUrl: item.image_url || item.imageUrl || null,
+            serial: item.serial || item.serialNumber || null
+          }));
+
+          return res.status(200).json({
+            private: false,
+            count: items.length,
+            rap: items.reduce((sum, i) => sum + i.rap, 0),
+            items,
+            source: 'rolimons_api'
+          });
+        }
+      }
+
+      lastError = `Status ${response.status}`;
+    } catch (error) {
+      lastError = error.message;
     }
-
-    const items = (data.items || []).map(item => ({
-      itemId: item.item_id || item.itemId || null,
-      name: item.name || 'Item desconhecido',
-      rap: Number(item.rap || item.recentAveragePrice || 0),
-      value: Number(item.value || item.estimatedValue || 0),
-      imageUrl: item.image_url || item.imageUrl || null,
-      serial: item.serial || item.serialNumber || null
-    }));
-
-    res.status(200).json({
-      private: false,
-      count: items.length,
-      rap: items.reduce((sum, i) => sum + i.rap, 0),
-      items
-    });
-  } catch (error) {
-    res.status(502).json({ error: 'rolimons_unavailable' });
   }
+
+  res.status(502).json({ error: 'rolimons_unavailable', detail: lastError || 'todos_endpoints_bloqueados' });
 };
 
 function fetchRoblox(url, options = {}) {
