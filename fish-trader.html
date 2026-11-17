@@ -191,14 +191,14 @@
   <style>.tool-stat,.tool-panel{background:#101010;border:1px solid #ffffff24;border-radius:15px;padding:20px}.tool-stat small,.tool-stat span{display:block;color:#999}.tool-stat b{display:block;font-size:28px;margin:12px 0 5px}.tool-panel h2{margin-top:0}.tool-panel p{color:#aaa;line-height:1.6}.activity-empty{padding:24px 0;color:#777}@media(max-width:720px){#toolHome>main>div:last-child{grid-template-columns:1fr!important}}</style>
 
   <style>
-    .menu-lateral{position:fixed;top:0;left:0;width:260px;height:100vh;background:#0d0d0d;border-right:1px solid #ffffff24;z-index:100;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .3s ease;box-shadow:4px 0 20px #0008}
+    .menu-lateral{position:fixed;top:0;left:0;width:280px;height:100vh;background:linear-gradient(180deg,#0a0a0a,#050505);border-right:1px solid #ffffff1b;z-index:100;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .35s cubic-bezier(.22,1,.36,1);box-shadow:8px 0 30px #000a}
     .menu-lateral[hidden]{display:none}
-    .menu-lateral-header{padding:20px 20px 10px;font-weight:850;letter-spacing:.1em;color:#fff;font-size:13px;border-bottom:1px solid #ffffff1b}
-    .menu-item{display:flex;align-items:center;gap:12px;padding:14px 20px;border:none;background:transparent;color:#ccc;font-size:14px;cursor:pointer;text-align:left;transition:.2s}
-    .menu-item:hover{background:#ffffff10;color:#fff}
-    .menu-item span{font-size:16px}
-    .menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99;backdrop-filter:blur(2px)}
-    .menu-overlay[hidden]{display:none}
+    .menu-lateral-header{padding:24px 20px 16px;font-weight:800;letter-spacing:.12em;color:#fff;font-size:13px;border-bottom:1px solid #ffffff1b;background:linear-gradient(90deg,#ffffff08,transparent)}
+    .menu-item{display:flex;align-items:center;gap:14px;padding:16px 20px;border:none;background:transparent;color:#b8b8b8;font-size:14px;cursor:pointer;text-align:left;transition:.2s;border-left:3px solid transparent}
+    .menu-item:hover{background:#ffffff0d;color:#fff;border-left-color:#fff}
+    .menu-item span{font-size:17px}
+    .menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99;backdrop-filter:blur(4px);opacity:0;transition:opacity .35s ease}
+    .menu-overlay[hidden]{display:none;opacity:0}
   </style>
 
   <script>
@@ -208,8 +208,8 @@
       const overlay=document.querySelector('#menuOverlay');
       const sair=document.querySelector('#menuSair');
 
-      function abrir(){menu.hidden=false;overlay.hidden=false;requestAnimationFrame(()=>{menu.style.transform='translateX(0)'})}
-      function fechar(){menu.style.transform='translateX(-100%)';setTimeout(()=>{menu.hidden=true;overlay.hidden=true},300)}
+      function abrir(){menu.hidden=false;overlay.hidden=false;requestAnimationFrame(()=>{menu.style.transform='translateX(0)';overlay.style.opacity='1'})}
+      function fechar(){menu.style.transform='translateX(-100%)';overlay.style.opacity='0';setTimeout(()=>{menu.hidden=true;overlay.hidden=true},350)}
 
       btn.addEventListener('click',abrir);
       overlay.addEventListener('click',fechar);
